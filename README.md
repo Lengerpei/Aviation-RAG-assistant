@@ -220,7 +220,7 @@ This project demonstrates:
 
 **Ambrose Lengerpei**
 
-Statistics Officer | Data Analyst | AI Enthusiast
+Statistician | Data Scientist | AI Enthusiast
 
 GitHub: https://github.com/Lengerpei
 
