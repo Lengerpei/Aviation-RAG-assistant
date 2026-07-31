@@ -1,111 +1,130 @@
-# ✈️ AviationGPT - Retrieval-Augmented Generation (RAG) Assistant
+# ✈️ Aviation RAG Assistant
+
+An AI-powered Retrieval-Augmented Generation (RAG) assistant that answers aviation-related questions using uploaded documents instead of relying solely on a Large Language Model (LLM). The application retrieves relevant information from aviation documents and uses it to generate accurate, context-aware responses.
+
+---
 
 ## Project Overview
 
-AviationGPT is an AI-powered Retrieval-Augmented Generation (RAG) assistant that answers aviation-related questions using a custom knowledge base. Instead of relying only on a Large Language Model (LLM), the application retrieves relevant information from aviation documents stored in a vector database before generating an answer.
+The Aviation RAG Assistant helps users quickly find information from aviation documents by allowing them to ask questions in natural language.
 
-The project demonstrates how to build a complete RAG pipeline using LangChain, ChromaDB, Hugging Face Embeddings, and the Groq API.
+Unlike a standard chatbot, this assistant first searches the uploaded documents for relevant information before generating a response. This reduces hallucinations and improves the reliability of answers.
 
 ---
 
 ## Features
 
-* AI-powered aviation question answering
-* Retrieval-Augmented Generation (RAG)
-* Semantic search using vector embeddings
-* ChromaDB vector database
-* Hugging Face embedding model
-* Groq LLM integration (Llama 3.3 70B)
-* Automatic document chunking
-* Word document ingestion (.docx)
-* Interactive command-line interface
+- Upload aviation documents
+- Ask questions in natural language
+- Retrieves relevant document sections before answering
+- Context-aware responses using Retrieval-Augmented Generation (RAG)
+- Simple web interface built with Streamlit
+- Modular architecture for future expansion
 
 ---
 
-## Technologies Used
+## How It Works
 
-* Python 3.14
-* LangChain
-* LangChain-Chroma
-* LangChain-Groq
-* LangChain-HuggingFace
-* ChromaDB
-* Hugging Face Embeddings
-* Sentence Transformers
-* Groq API
-* Python Dotenv
+The assistant follows a standard RAG pipeline:
+
+```
+            Aviation Documents
+                     │
+                     ▼
+         Document Processing
+                     │
+                     ▼
+            Text Chunking
+                     │
+                     ▼
+          Generate Embeddings
+                     │
+                     ▼
+          Vector Database Storage
+                     │
+                     ▼
+             User Question
+                     │
+                     ▼
+      Retrieve Relevant Chunks
+                     │
+                     ▼
+          Prompt + Retrieved Context
+                     │
+                     ▼
+             Groq Language Model
+                     │
+                     ▼
+             Generated Response
+```
+
+---
+
+## Tech Stack
+
+- Python
+- LangChain
+- Groq LLM
+- HuggingFace Embeddings
+- Chroma Vector Database
+- Streamlit
 
 ---
 
 ## Project Structure
 
-```text
-rt-aaidc_project aviation/
-│
-├── .venv/
-├── .env
-├── chromadb/
-├── data/
-│   ├── Aviation Knowledge Base Part 1.docx
-│   ├── Aviation Knowledge Base Part 2.docx
-│   ├── Aviation Knowledge Base Part 3.docx
-│   └── Aviation Knowledge Base Part 4.docx
+```
+Aviation-RAG-assistant/
 │
 ├── src/
-│   ├── config.py
-│   ├── ingest.py
-│   ├── rag.py
-│   └── app.py
+│   ├── app.py
+│   ├── rag_pipeline.py
+│   ├── embeddings.py
+│   ├── vector_store.py
+│   └── utils.py
+│
+├── data/
 │
 ├── requirements.txt
+│
+├── .env.example
+│
 └── README.md
 ```
 
----
-
-## How the Application Works
-
-1. Aviation documents are placed in the `data` folder.
-2. `ingest.py` reads and splits the documents into manageable chunks.
-3. Hugging Face generates vector embeddings for each chunk.
-4. The embeddings are stored in ChromaDB.
-5. When a user asks a question:
-
-   * Relevant document chunks are retrieved from ChromaDB.
-   * The retrieved context is sent to the Groq LLM.
-   * The LLM generates an answer based on the retrieved information.
+> Folder names may vary depending on your implementation.
 
 ---
 
 ## Installation
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Lengerpei/rt-aaidc_project-aviation.git
+git clone https://github.com/Lengerpei/Aviation-RAG-assistant.git
+
+cd Aviation-RAG-assistant
 ```
 
-Move into the project directory:
+### 2. Create a virtual environment
+
+Windows
 
 ```bash
-cd rt-aaidc_project-aviation
+python -m venv venv
+venv\Scripts\activate
 ```
 
-Create a virtual environment:
+Mac/Linux
 
 ```bash
-python -m venv .venv
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-Activate the virtual environment.
+---
 
-Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-Install dependencies:
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -113,106 +132,89 @@ pip install -r requirements.txt
 
 ---
 
-## Environment Variables
+### 4. Create a `.env` file
 
-Create a `.env` file in the project root.
-
-```env
-GROQ_API_KEY=your_groq_api_key
-```
-
----
-
-## Build the Knowledge Base
-
-Run:
-
-```bash
-python src/ingest.py
-```
-
-This will:
-
-* Load all Word documents
-* Split the documents into chunks
-* Generate embeddings
-* Store them in ChromaDB
-
----
-
-## Run the Application
-
-```bash
-python src/app.py
-```
-
-Example:
+Create a file named `.env`
 
 ```text
-Ask:
-What is ICAO?
-
-Answer:
-The International Civil Aviation Organization (ICAO) is a specialized agency of the United Nations responsible for developing international standards and recommended practices for civil aviation.
+GROQ_API_KEY=your_api_key_here
 ```
+
+Replace the value with your own Groq API key.
+
+---
+
+### 5. Run the application
+
+```bash
+streamlit run src/app.py
+```
+
+The application will open in your browser.
 
 ---
 
 ## Example Questions
 
-* What is ICAO?
-* What are the functions of Air Traffic Control?
-* What is runway lighting?
-* Explain aviation safety management.
-* What are airport movement areas?
-* What is the difference between ICAO and IATA?
-* What are the responsibilities of an airport operator?
+Try asking questions such as:
+
+- What is a Fixed Base Operator?
+- Explain ICAO Annex 14.
+- What are the responsibilities of Air Traffic Control?
+- What documents are required for airport certification?
+- Summarize the uploaded aviation report.
 
 ---
 
-## Knowledge Base
+## Example Workflow
 
-The assistant was trained using custom aviation documents covering:
-
-* Introduction to Aviation
-* Airport Operations
-* Air Traffic Management
-* Aviation Safety
-* Aviation Security
-* Meteorology
-* Aircraft Operations
-* ICAO Standards
-* IATA Overview
-* Aviation Regulations
+1. Upload aviation documents.
+2. Wait for indexing to complete.
+3. Ask a question.
+4. The assistant retrieves relevant information.
+5. A grounded answer is generated.
 
 ---
 
-## Learning Outcomes
+## Limitations
 
-This project demonstrates:
-
-* Retrieval-Augmented Generation (RAG)
-* Document preprocessing
-* Text chunking
-* Vector embeddings
-* Semantic search
-* Vector databases
-* Large Language Model integration
-* Prompt engineering
-* AI application development
+- Responses depend on the quality of uploaded documents.
+- Cannot answer questions outside the document collection.
+- Performance depends on the selected embedding model and language model.
 
 ---
 
 ## Future Improvements
 
-* Streamlit web interface
-* PDF document support
-* Conversation memory
-* Source citations
-* Hybrid search
-* Multi-document collections
-* Web deployment
-* Upload documents through the interface
+- Source citations for every response
+- Multi-document collections
+- Chat history and conversation memory
+- Hybrid keyword and semantic search
+- Cloud deployment
+- User authentication
+
+---
+
+## Why RAG?
+
+Traditional language models generate responses from learned knowledge, which may not always be accurate or up to date.
+
+Retrieval-Augmented Generation (RAG) improves reliability by retrieving relevant information from documents before generating an answer.
+
+This makes responses:
+
+- More accurate
+- More transparent
+- Better grounded in source documents
+- Less prone to hallucination
+
+---
+
+## Repository
+
+GitHub Repository:
+
+https://github.com/Lengerpei/Aviation-RAG-assistant
 
 ---
 
@@ -220,12 +222,39 @@ This project demonstrates:
 
 **Ambrose Lengerpei**
 
-Statistician | Data Scientist | AI Enthusiast
+Statistician | Data Scientist | AI & Machine Learning Enthusiast
 
-GitHub: https://github.com/Lengerpei
+Interests:
+
+- Artificial Intelligence
+- Retrieval-Augmented Generation (RAG)
+- Aviation Analytics
+- Machine Learning
+- Business Intelligence
+
+GitHub:
+https://github.com/Lengerpei
 
 ---
 
 ## License
 
-This project is intended for educational purposes as part of the Ready Tensor Retrieval-Augmented Generation (RAG) Project.
+This project is licensed under the MIT License.
+
+```
+MIT License
+
+Copyright (c) 2026 Ambrose Lengerpei
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files, to deal in the Software
+without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software.
+```
+
+---
+
+## Acknowledgements
+
+This project was developed as part of the **Ready Tensor AI Developer Certification Program**, demonstrating the practical application of Retrieval-Augmented Generation (RAG) for document-based question answering.
