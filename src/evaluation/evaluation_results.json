@@ -1,0 +1,563 @@
+{
+    "number_of_questions": 30,
+    "recall_at_1": 0.8333333333333334,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "mrr": 0.9166666666666666,
+    "question_results": [
+        {
+            "id": "Q001",
+            "question": "What is aviation and why is it important?",
+            "relevant_chunks": [
+                "chunk_001"
+            ],
+            "retrieved_chunks": [
+                "chunk_001",
+                "chunk_003",
+                "chunk_048",
+                "chunk_015",
+                "chunk_047"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q002",
+            "question": "What are the main sectors of the aviation industry?",
+            "relevant_chunks": [
+                "chunk_003",
+                "chunk_002"
+            ],
+            "retrieved_chunks": [
+                "chunk_002",
+                "chunk_001",
+                "chunk_015",
+                "chunk_048",
+                "chunk_047"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q003",
+            "question": "What is the difference between an aerodrome, an airport, and a runway?",
+            "relevant_chunks": [
+                "chunk_004"
+            ],
+            "retrieved_chunks": [
+                "chunk_004",
+                "chunk_061",
+                "chunk_005",
+                "chunk_015",
+                "chunk_060"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q004",
+            "question": "What are the main functions of taxiways, aprons, gates, and passenger terminals?",
+            "relevant_chunks": [
+                "chunk_008",
+                "chunk_005"
+            ],
+            "retrieved_chunks": [
+                "chunk_008",
+                "chunk_005",
+                "chunk_009",
+                "chunk_007",
+                "chunk_015"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q005",
+            "question": "What is an aircraft movement?",
+            "relevant_chunks": [
+                "chunk_006",
+                "chunk_024"
+            ],
+            "retrieved_chunks": [
+                "chunk_024",
+                "chunk_001",
+                "chunk_059",
+                "chunk_015",
+                "chunk_014"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q006",
+            "question": "How are aircraft movements calculated?",
+            "relevant_chunks": [
+                "chunk_024"
+            ],
+            "retrieved_chunks": [
+                "chunk_024",
+                "chunk_059",
+                "chunk_013",
+                "chunk_023",
+                "chunk_006"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q007",
+            "question": "What is the difference between the airside and landside areas of an airport?",
+            "relevant_chunks": [
+                "chunk_007",
+                "chunk_006"
+            ],
+            "retrieved_chunks": [
+                "chunk_007",
+                "chunk_004",
+                "chunk_005",
+                "chunk_015",
+                "chunk_054"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q008",
+            "question": "What are the main facilities found in an airport?",
+            "relevant_chunks": [
+                "chunk_007",
+                "chunk_008",
+                "chunk_009"
+            ],
+            "retrieved_chunks": [
+                "chunk_007",
+                "chunk_004",
+                "chunk_054",
+                "chunk_015",
+                "chunk_005"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q009",
+            "question": "What is the purpose of an Airport Rescue and Fire Fighting service?",
+            "relevant_chunks": [
+                "chunk_039"
+            ],
+            "retrieved_chunks": [
+                "chunk_039",
+                "chunk_040",
+                "chunk_041",
+                "chunk_038",
+                "chunk_050"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q010",
+            "question": "What are the main components of an aircraft turnaround?",
+            "relevant_chunks": [
+                "chunk_011"
+            ],
+            "retrieved_chunks": [
+                "chunk_011",
+                "chunk_015",
+                "chunk_012",
+                "chunk_001",
+                "chunk_007"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q011",
+            "question": "What are some key performance indicators used by airports?",
+            "relevant_chunks": [
+                "chunk_012"
+            ],
+            "retrieved_chunks": [
+                "chunk_012",
+                "chunk_023",
+                "chunk_025",
+                "chunk_050",
+                "chunk_016"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q012",
+            "question": "What are the main stages of a passenger journey at an airport?",
+            "relevant_chunks": [
+                "chunk_017",
+                "chunk_018"
+            ],
+            "retrieved_chunks": [
+                "chunk_017",
+                "chunk_013",
+                "chunk_016",
+                "chunk_015",
+                "chunk_012"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q013",
+            "question": "What methods can passengers use to check in for a flight?",
+            "relevant_chunks": [
+                "chunk_018"
+            ],
+            "retrieved_chunks": [
+                "chunk_037",
+                "chunk_018",
+                "chunk_019",
+                "chunk_017",
+                "chunk_006"
+            ],
+            "recall@1": 0,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 0.5
+        },
+        {
+            "id": "Q014",
+            "question": "What are the main categories of passengers at an airport?",
+            "relevant_chunks": [
+                "chunk_020"
+            ],
+            "retrieved_chunks": [
+                "chunk_020",
+                "chunk_015",
+                "chunk_016",
+                "chunk_060",
+                "chunk_017"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q015",
+            "question": "What are the main types of air cargo?",
+            "relevant_chunks": [
+                "chunk_022",
+                "chunk_021"
+            ],
+            "retrieved_chunks": [
+                "chunk_021",
+                "chunk_022",
+                "chunk_015",
+                "chunk_002",
+                "chunk_009"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q016",
+            "question": "What are the main steps in the cargo handling process?",
+            "relevant_chunks": [
+                "chunk_022"
+            ],
+            "retrieved_chunks": [
+                "chunk_022",
+                "chunk_009",
+                "chunk_023",
+                "chunk_006",
+                "chunk_016"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q017",
+            "question": "What is the purpose of airport statistics?",
+            "relevant_chunks": [
+                "chunk_025",
+                "chunk_023"
+            ],
+            "retrieved_chunks": [
+                "chunk_061",
+                "chunk_023",
+                "chunk_004",
+                "chunk_016",
+                "chunk_025"
+            ],
+            "recall@1": 0,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 0.5
+        },
+        {
+            "id": "Q018",
+            "question": "What are the main objectives of ICAO?",
+            "relevant_chunks": [
+                "chunk_026"
+            ],
+            "retrieved_chunks": [
+                "chunk_026",
+                "chunk_060",
+                "chunk_031",
+                "chunk_032",
+                "chunk_016"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q019",
+            "question": "What is the difference between ICAO and IATA?",
+            "relevant_chunks": [
+                "chunk_026",
+                "chunk_027",
+                "chunk_028"
+            ],
+            "retrieved_chunks": [
+                "chunk_060",
+                "chunk_027",
+                "chunk_026",
+                "chunk_028",
+                "chunk_016"
+            ],
+            "recall@1": 0,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 0.5
+        },
+        {
+            "id": "Q020",
+            "question": "What are the main components of Air Traffic Management?",
+            "relevant_chunks": [
+                "chunk_029",
+                "chunk_028"
+            ],
+            "retrieved_chunks": [
+                "chunk_029",
+                "chunk_031",
+                "chunk_012",
+                "chunk_016",
+                "chunk_028"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q021",
+            "question": "What are the main responsibilities of air traffic controllers?",
+            "relevant_chunks": [
+                "chunk_029"
+            ],
+            "retrieved_chunks": [
+                "chunk_029",
+                "chunk_030",
+                "chunk_031",
+                "chunk_010",
+                "chunk_051"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q022",
+            "question": "What is a Safety Management System in aviation?",
+            "relevant_chunks": [
+                "chunk_033"
+            ],
+            "retrieved_chunks": [
+                "chunk_033",
+                "chunk_032",
+                "chunk_034",
+                "chunk_036",
+                "chunk_030"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q023",
+            "question": "What are the four components of a Safety Management System?",
+            "relevant_chunks": [
+                "chunk_033",
+                "chunk_034"
+            ],
+            "retrieved_chunks": [
+                "chunk_033",
+                "chunk_034",
+                "chunk_032",
+                "chunk_035",
+                "chunk_010"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q024",
+            "question": "What are some examples of hazards in aviation operations?",
+            "relevant_chunks": [
+                "chunk_035"
+            ],
+            "retrieved_chunks": [
+                "chunk_035",
+                "chunk_012",
+                "chunk_032",
+                "chunk_034",
+                "chunk_041"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q025",
+            "question": "What are the main objectives of airport security?",
+            "relevant_chunks": [
+                "chunk_036"
+            ],
+            "retrieved_chunks": [
+                "chunk_036",
+                "chunk_037",
+                "chunk_038",
+                "chunk_007",
+                "chunk_061"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q026",
+            "question": "What security measures are used to control access to restricted airport areas?",
+            "relevant_chunks": [
+                "chunk_037"
+            ],
+            "retrieved_chunks": [
+                "chunk_037",
+                "chunk_038",
+                "chunk_007",
+                "chunk_036",
+                "chunk_030"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q027",
+            "question": "What are the main objectives of Airport Rescue and Fire Fighting?",
+            "relevant_chunks": [
+                "chunk_039"
+            ],
+            "retrieved_chunks": [
+                "chunk_039",
+                "chunk_041",
+                "chunk_040",
+                "chunk_038",
+                "chunk_036"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q028",
+            "question": "What is the purpose of an Airport Emergency Plan?",
+            "relevant_chunks": [
+                "chunk_040"
+            ],
+            "retrieved_chunks": [
+                "chunk_040",
+                "chunk_039",
+                "chunk_061",
+                "chunk_041",
+                "chunk_036"
+            ],
+            "recall@1": 1,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 1.0
+        },
+        {
+            "id": "Q029",
+            "question": "What are the main environmental objectives of airports?",
+            "relevant_chunks": [
+                "chunk_041"
+            ],
+            "retrieved_chunks": [
+                "chunk_043",
+                "chunk_041",
+                "chunk_054",
+                "chunk_012",
+                "chunk_007"
+            ],
+            "recall@1": 0,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 0.5
+        },
+        {
+            "id": "Q030",
+            "question": "What factors can affect aviation operations and safety according to aviation meteorology?",
+            "relevant_chunks": [
+                "chunk_045",
+                "chunk_044"
+            ],
+            "retrieved_chunks": [
+                "chunk_043",
+                "chunk_044",
+                "chunk_012",
+                "chunk_032",
+                "chunk_045"
+            ],
+            "recall@1": 0,
+            "recall@3": 1,
+            "recall@5": 1,
+            "reciprocal_rank": 0.5
+        }
+    ]
+}

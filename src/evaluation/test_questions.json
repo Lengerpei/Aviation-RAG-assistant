@@ -1,0 +1,256 @@
+[
+  {
+    "id": "Q001",
+    "question": "What is aviation and why is it important?",
+    "reference_answer": "Aviation refers to the design, development, production, operation, and use of aircraft. It is important because it supports transportation, trade, tourism, emergency services, connectivity, and economic activity.",
+    "relevant_chunk_ids": [
+      "chunk_001"
+    ]
+  },
+  {
+    "id": "Q002",
+    "question": "What are the main sectors of the aviation industry?",
+    "reference_answer": "The aviation industry includes commercial aviation, general aviation, military aviation, and related aviation services and activities.",
+    "relevant_chunk_ids": [
+      "chunk_002",
+      "chunk_003"
+    ]
+  },
+  {
+    "id": "Q003",
+    "question": "What is the difference between an aerodrome, an airport, and a runway?",
+    "reference_answer": "An aerodrome is an area used for aircraft arrival, departure, and movement. An airport is an aerodrome equipped with facilities and services for passengers, cargo, and aircraft operations. A runway is a defined area used for aircraft take-off and landing.",
+    "relevant_chunk_ids": [
+      "chunk_004"
+    ]
+  },
+  {
+    "id": "Q004",
+    "question": "What are the main functions of taxiways, aprons, gates, and passenger terminals?",
+    "reference_answer": "Taxiways allow aircraft to move between runways and other airport areas. Aprons are used for aircraft parking and ground operations. Gates provide areas for passenger boarding and disembarkation, while passenger terminals process and serve passengers.",
+    "relevant_chunk_ids": [
+      "chunk_005",
+      "chunk_008"
+    ]
+  },
+  {
+    "id": "Q005",
+    "question": "What is an aircraft movement?",
+    "reference_answer": "An aircraft movement refers to one landing or one take-off.",
+    "relevant_chunk_ids": [
+      "chunk_006",
+      "chunk_024"
+    ]
+  },
+  {
+    "id": "Q006",
+    "question": "How are aircraft movements calculated?",
+    "reference_answer": "Aircraft movements are calculated by adding the number of landings and take-offs.",
+    "relevant_chunk_ids": [
+      "chunk_024"
+    ]
+  },
+  {
+    "id": "Q007",
+    "question": "What is the difference between the airside and landside areas of an airport?",
+    "reference_answer": "Airside areas are parts of the airport used for aircraft operations and restricted activities, while landside areas are accessible to passengers, visitors, and other members of the public.",
+    "relevant_chunk_ids": [
+      "chunk_006",
+      "chunk_007"
+    ]
+  },
+  {
+    "id": "Q008",
+    "question": "What are the main facilities found in an airport?",
+    "reference_answer": "Airport facilities include runways, taxiways, aprons, passenger terminals, cargo terminals, control towers, rescue and firefighting facilities, fuel facilities, and other supporting infrastructure.",
+    "relevant_chunk_ids": [
+      "chunk_007",
+      "chunk_008",
+      "chunk_009"
+    ]
+  },
+  {
+    "id": "Q009",
+    "question": "What is the purpose of an Airport Rescue and Fire Fighting service?",
+    "reference_answer": "Airport Rescue and Fire Fighting services respond to aircraft accidents and airport emergencies, with objectives including saving lives, protecting property, controlling aircraft fires, supporting rescue operations, and helping restore airport operations.",
+    "relevant_chunk_ids": [
+      "chunk_039"
+    ]
+  },
+  {
+    "id": "Q010",
+    "question": "What are the main components of an aircraft turnaround?",
+    "reference_answer": "Aircraft turnaround involves activities such as aircraft arrival, ground handling, passenger and baggage processing, servicing, loading and unloading, and preparation for the next departure.",
+    "relevant_chunk_ids": [
+      "chunk_011"
+    ]
+  },
+  {
+    "id": "Q011",
+    "question": "What are some key performance indicators used by airports?",
+    "reference_answer": "Airport KPIs include aircraft movements, passenger throughput, cargo throughput, flight delays, on-time performance, and aircraft turnaround time.",
+    "relevant_chunk_ids": [
+      "chunk_012"
+    ]
+  },
+  {
+    "id": "Q012",
+    "question": "What are the main stages of a passenger journey at an airport?",
+    "reference_answer": "A typical passenger journey includes arrival at the airport, check-in, baggage drop-off, security screening, immigration for international travel, customs where applicable, waiting in the departure lounge, boarding, arrival, baggage collection, and exit from the terminal.",
+    "relevant_chunk_ids": [
+      "chunk_017",
+      "chunk_018"
+    ]
+  },
+  {
+    "id": "Q013",
+    "question": "What methods can passengers use to check in for a flight?",
+    "reference_answer": "Passengers can check in at an airport counter, using self-service kiosks, through mobile check-in, or through online check-in.",
+    "relevant_chunk_ids": [
+      "chunk_018"
+    ]
+  },
+  {
+    "id": "Q014",
+    "question": "What are the main categories of passengers at an airport?",
+    "reference_answer": "Passenger categories include domestic passengers, international passengers, transit passengers, transfer passengers, and VIP passengers.",
+    "relevant_chunk_ids": [
+      "chunk_020"
+    ]
+  },
+  {
+    "id": "Q015",
+    "question": "What are the main types of air cargo?",
+    "reference_answer": "The main types of air cargo include general cargo, perishable cargo, dangerous goods, and live animals.",
+    "relevant_chunk_ids": [
+      "chunk_021",
+      "chunk_022"
+    ]
+  },
+  {
+    "id": "Q016",
+    "question": "What are the main steps in the cargo handling process?",
+    "reference_answer": "The cargo handling process generally includes cargo acceptance, documentation, security screening, customs clearance, storage, aircraft loading, transportation, unloading, and delivery.",
+    "relevant_chunk_ids": [
+      "chunk_022"
+    ]
+  },
+  {
+    "id": "Q017",
+    "question": "What is the purpose of airport statistics?",
+    "reference_answer": "Airport statistics measure operational performance and support planning, forecasting, investment, policy decisions, service improvement, capacity planning, budgeting, infrastructure development, government reporting, and strategic planning.",
+    "relevant_chunk_ids": [
+      "chunk_023",
+      "chunk_025"
+    ]
+  },
+  {
+    "id": "Q018",
+    "question": "What are the main objectives of ICAO?",
+    "reference_answer": "ICAO's objectives include aviation safety, security, environmental protection, standardization, and international cooperation.",
+    "relevant_chunk_ids": [
+      "chunk_026"
+    ]
+  },
+  {
+    "id": "Q019",
+    "question": "What is the difference between ICAO and IATA?",
+    "reference_answer": "ICAO is a specialized United Nations agency responsible for establishing international civil aviation standards, while IATA is a global trade association representing airlines and supporting airline cooperation, safety initiatives, ticketing standards, airport coding, and industry training.",
+    "relevant_chunk_ids": [
+      "chunk_026",
+      "chunk_027",
+      "chunk_028"
+    ]
+  },
+  {
+    "id": "Q020",
+    "question": "What are the main components of Air Traffic Management?",
+    "reference_answer": "Air Traffic Management consists of Air Traffic Control, Airspace Management, and Air Traffic Flow Management.",
+    "relevant_chunk_ids": [
+      "chunk_028",
+      "chunk_029"
+    ]
+  },
+  {
+    "id": "Q021",
+    "question": "What are the main responsibilities of air traffic controllers?",
+    "reference_answer": "Air traffic controllers issue take-off and landing clearances, provide taxi instructions, maintain separation between aircraft, and coordinate during emergencies.",
+    "relevant_chunk_ids": [
+      "chunk_029"
+    ]
+  },
+  {
+    "id": "Q022",
+    "question": "What is a Safety Management System in aviation?",
+    "reference_answer": "A Safety Management System is a systematic approach to managing aviation safety through policies, procedures, risk assessments, reporting systems, and continuous improvement.",
+    "relevant_chunk_ids": [
+      "chunk_033"
+    ]
+  },
+  {
+    "id": "Q023",
+    "question": "What are the four components of a Safety Management System?",
+    "reference_answer": "The four components are Safety Policy, Safety Risk Management, Safety Assurance, and Safety Promotion.",
+    "relevant_chunk_ids": [
+      "chunk_033",
+      "chunk_034"
+    ]
+  },
+  {
+    "id": "Q024",
+    "question": "What are some examples of hazards in aviation operations?",
+    "reference_answer": "Examples include bird activity near runways, foreign object debris, poor runway lighting, fuel spills, equipment failure, and human error.",
+    "relevant_chunk_ids": [
+      "chunk_035"
+    ]
+  },
+  {
+    "id": "Q025",
+    "question": "What are the main objectives of airport security?",
+    "reference_answer": "Airport security aims to prevent terrorism and sabotage, detect prohibited items, protect passengers, and secure airport infrastructure.",
+    "relevant_chunk_ids": [
+      "chunk_036"
+    ]
+  },
+  {
+    "id": "Q026",
+    "question": "What security measures are used to control access to restricted airport areas?",
+    "reference_answer": "Access control measures include identification cards, biometric systems, security gates, CCTV monitoring, and security patrols.",
+    "relevant_chunk_ids": [
+      "chunk_037"
+    ]
+  },
+  {
+    "id": "Q027",
+    "question": "What are the main objectives of Airport Rescue and Fire Fighting?",
+    "reference_answer": "ARFF aims to save lives, protect property, control aircraft fires, support rescue operations, and restore airport operations.",
+    "relevant_chunk_ids": [
+      "chunk_039"
+    ]
+  },
+  {
+    "id": "Q028",
+    "question": "What is the purpose of an Airport Emergency Plan?",
+    "reference_answer": "An Airport Emergency Plan outlines procedures for managing emergencies and defines roles and responsibilities, communication procedures, resource allocation, and recovery activities.",
+    "relevant_chunk_ids": [
+      "chunk_040"
+    ]
+  },
+  {
+    "id": "Q029",
+    "question": "What are the main environmental objectives of airports?",
+    "reference_answer": "Airports seek to reduce emissions, manage noise, prevent pollution, protect biodiversity, and improve energy efficiency.",
+    "relevant_chunk_ids": [
+      "chunk_041"
+    ]
+  },
+  {
+    "id": "Q030",
+    "question": "What factors can affect aviation operations and safety according to aviation meteorology?",
+    "reference_answer": "Weather factors affecting aviation include wind, visibility, clouds, thunderstorms, wind shear, turbulence, and temperature.",
+    "relevant_chunk_ids": [
+      "chunk_044",
+      "chunk_045"
+    ]
+  }
+]

@@ -5,14 +5,13 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
-from config import (
+from src.config import (
     DATA_DIR,
     CHROMA_DB_DIR,
     EMBEDDING_MODEL,
     CHUNK_SIZE,
     CHUNK_OVERLAP,
 )
-
 
 def load_documents():
     """Load all Word documents from the data folder."""
@@ -36,6 +35,10 @@ def load_documents():
         loader = UnstructuredWordDocumentLoader(str(file))
         docs = loader.load()
 
+        # Add source information to document metadata
+        for doc in docs:
+            doc.metadata["source"] = file.name
+
         documents.extend(docs)
 
     print(f"\nLoaded {len(documents)} document(s).\n")
@@ -44,7 +47,7 @@ def load_documents():
 
 
 def split_documents(documents):
-    """Split documents into smaller chunks."""
+    """Split documents into smaller chunks and assign stable chunk IDs."""
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
@@ -52,6 +55,14 @@ def split_documents(documents):
     )
 
     chunks = splitter.split_documents(documents)
+
+    # Assign a unique ID to every chunk
+    for index, chunk in enumerate(chunks, start=1):
+
+        chunk.metadata["chunk_id"] = f"chunk_{index:03d}"
+
+        # Keep useful metadata for evaluation and debugging
+        chunk.metadata["chunk_size"] = len(chunk.page_content)
 
     print(f"Created {len(chunks)} chunks.\n")
 
@@ -69,6 +80,10 @@ def create_vector_database(chunks):
         documents=chunks,
         embedding=embeddings,
         persist_directory=CHROMA_DB_DIR,
+        ids=[
+            chunk.metadata["chunk_id"]
+            for chunk in chunks
+        ],
     )
 
     print("Vector database created successfully.")
