@@ -2,294 +2,174 @@
 
 An AI-powered Retrieval-Augmented Generation (RAG) assistant designed to answer aviation-related questions using a curated aviation knowledge base.
 
-The assistant retrieves relevant information from aviation documents before generating an answer using a Large Language Model (LLM). This approach helps provide responses that are grounded in the available knowledge base rather than relying entirely on the model's pre-trained knowledge.
+The assistant retrieves relevant information from aviation documents before generating an answer using a Large Language Model (LLM). This approach helps provide responses that are grounded in the available documents.
 
 This project was developed as part of the **Ready Tensor AI Developer Certification Program**.
 
 ---
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Quick start](#quick-start)
+- [Features](#features)
+- [How the RAG System Works](#how-the-rag-system-works)
+- [Knowledge Base & Chunking](#knowledge-base--chunking)
+- [Retrieval Evaluation](#retrieval-evaluation)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Installation & Environment Variables](#installation--environment-variables)
+- [Build the Vector Database](#build-the-vector-database)
+- [Run the Application](#run-the-application)
+- [Run Retrieval Evaluation](#run-retrieval-evaluation)
+- [Inspect Chunk Metadata](#inspect-chunk-metadata)
+- [Future Improvements](#future-improvements)
+- [Responsible Use and Limitations](#responsible-use-and-limitations)
+- [Author & License](#author--license)
+
+
 ## 📌 Project Overview
 
-The Aviation RAG Assistant allows users to ask aviation-related questions in natural language and receive answers based on information contained in the aviation knowledge base.
+The Aviation RAG Assistant allows users to ask aviation-related questions in natural language and receive answers based on information contained in a curated knowledge base. The knowledge base covers topics including airport operations, air traffic management, safety management systems, ARFF, airport security, aviation meteorology, Kenya's aviation industry, and more.
 
-The knowledge base covers topics including:
+The system uses semantic similarity search to identify relevant document chunks and provides those chunks as context to a language model so answers are grounded in source material.
 
-- Aviation fundamentals
-- Airport operations
-- Passenger processing
-- Air cargo operations
-- Airport statistics and KPIs
-- ICAO and IATA
-- Air Traffic Management
-- Safety Management Systems
-- Airport security
-- Airport Rescue and Fire Fighting (ARFF)
-- Environmental management
-- Aviation meteorology
-- Kenya's aviation industry
-- Kenya Airports Authority (KAA)
-- Kenya Civil Aviation Authority (KCAA)
-- Major airports in Kenya
-- Aviation economics
-- Airport planning and development
-- Emerging aviation technologies
 
-The system uses semantic similarity search to identify relevant document chunks and provides these chunks as context to the language model.
+## 🎯 Quick start
 
----
+Clone, create a virtual environment, install dependencies, ingest documents, and run the app:
 
-## 🎯 Objectives
+```bash
+git clone https://github.com/Lengerpei/Aviation-RAG-assistant.git
+cd Aviation-RAG-assistant
+python -m venv .venv            # Windows: python -m venv .venv
+# Activate the virtualenv:
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+# Create a .env (see .env.example) and set GROQ_API_KEY and any other required vars
+python -m src.ingest           # build the Chroma vector DB
+streamlit run src/app.py       # start the Streamlit UI
+```
 
-The main objectives of the project are to:
-
-1. Build a practical aviation-focused RAG application.
-2. Enable natural-language interaction with aviation documents.
-3. Retrieve relevant information using semantic similarity search.
-4. Generate answers grounded in retrieved document content.
-5. Reduce the likelihood of unsupported or hallucinated responses.
-6. Evaluate retrieval performance using a predefined test dataset.
-7. Provide a foundation that can be extended to other aviation knowledge applications.
-
----
 
 ## ✨ Features
 
 - Aviation-focused question answering
 - Retrieval-Augmented Generation (RAG)
 - Semantic similarity search
-- Document-based responses
-- HuggingFace embeddings
+- Document-based responses with source-aware chunk metadata
+- Hugging Face embeddings
 - ChromaDB vector database
 - Groq language model
 - Streamlit user interface
-- Configurable text chunking
-- Chunk metadata and unique chunk IDs
-- Retrieval evaluation dataset
-- Recall@1, Recall@3 and Recall@5 evaluation
-- Mean Reciprocal Rank (MRR) evaluation
+- Configurable text chunking (chunk size & overlap)
+- Retrieval evaluation (Recall@1/3/5, MRR)
 - Environment-based API key management
 - MIT licensed
 - Modular project structure
 
----
 
 ## 🧠 How the RAG System Works
 
 The assistant follows a retrieval-augmented generation pipeline:
 
-```text
-                    AVIATION DOCUMENTS
-                           │
-                           ▼
-                 Document Loading
-                           │
-                           ▼
-                  Text Processing
-                           │
-                           ▼
-                    Text Chunking
-                           │
-                           ▼
-                 Generate Embeddings
-                           │
-                           ▼
-                  Chroma Vector DB
-                           │
-                           │
-                     USER QUESTION
-                           │
-                           ▼
-                    Query Embedding
-                           │
-                           ▼
-                Similarity Search
-                           │
-                           ▼
-                Relevant Text Chunks
-                           │
-                           ▼
-              Prompt + Retrieved Context
-                           │
-                           ▼
-                     Groq LLM
-                           │
-                           ▼
-                  Grounded Response
+1. Document Loading
+2. Text Processing
+3. Text Chunking
+4. Generate Embeddings
+5. Store embeddings in ChromaDB
+6. User question -> Query Embedding -> Similarity Search
+7. Retrieve relevant chunks
+8. Provide retrieved context + prompt to LLM (Groq)
+9. Generate grounded response
 
-The system separates the process into two main stages.
 
-Retrieval
+## Knowledge Base & Chunking
 
-The user's question is converted into an embedding and compared against the embeddings stored in ChromaDB.
+Documents are stored in the `data/` directory and are split into smaller text chunks using LangChain's RecursiveCharacterTextSplitter. Each chunk is assigned metadata such as:
 
-The most relevant document chunks are retrieved based on semantic similarity.
+- chunk_id
+- chunk_size
+- source
 
-Generation
+Example metadata:
 
-The retrieved chunks are provided to the language model as context. The model then generates an answer based on the retrieved information.
+```python
+{
+    'chunk_id': 'chunk_001',
+    'chunk_size': 770,
+    'source': 'Part 1.docx'
+}
+```
 
-📚 Knowledge Base
+Text chunking configuration is controlled via the project configuration (e.g., `CHUNK_SIZE`, `CHUNK_OVERLAP`) and typically results in chunks of ~700–800 characters.
 
-The project uses aviation documents stored in the data/ directory.
 
-The documents are processed and divided into smaller text chunks before being converted into embeddings.
+## 🔎 Retrieval
 
-Each chunk is assigned metadata including:
+- Embeddings: Hugging Face embeddings are used for semantic representation.
+- Vector DB: ChromaDB stores the embeddings and metadata.
+- Search: Similarity search retrieves the top-k most relevant chunks for a query.
 
-chunk_id
-chunk_size
-source
+Lower similarity distance indicates greater relevance. Example:
 
-For example:
+Question: What is a Safety Management System in aviation?
 
-chunk_id: chunk_001
-chunk_size: 770
-source: Part 1.docx
+Rank 1: chunk_033 — Distance: 0.4037
 
-The chunk IDs make it possible to identify which sections of the knowledge base were retrieved during evaluation.
+Rank 2: chunk_032 — Distance: 0.5227
 
-✂️ Text Chunking Strategy
+Rank 3: chunk_034 — Distance: 0.8323
 
-The project uses LangChain's RecursiveCharacterTextSplitter.
 
-The chunking configuration is controlled through the project configuration:
+## 📊 Retrieval Evaluation
 
-RecursiveCharacterTextSplitter(
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP
-)
+The evaluation dataset is stored at `src/evaluation/test_questions.json` and contains test questions with reference answers and relevant chunk IDs. The project includes a script to compute Recall@1, Recall@3, Recall@5 and Mean Reciprocal Rank (MRR).
 
-The current knowledge base produces chunks of approximately 700–800 characters, depending on the content and document structure.
+Evaluation summary (30 test questions):
 
-Chunk metadata is stored alongside the vector representations.
+| Metric               | Result |
+|---------------------:|:------:|
+| Number of Questions  | 30     |
+| Recall@1             | 0.833  |
+| Recall@3             | 1.000  |
+| Recall@5             | 1.000  |
+| MRR                  | 0.917  |
 
-This allows the retrieval system to identify individual chunks such as:
+Interpretation: 83.3% Recall@1 (relevant chunk was top result for most questions), and 100% Recall@3/5 for the provided test set.
 
-chunk_001
-chunk_002
-chunk_003
-...
 
-The chunking strategy was selected to keep retrieved passages reasonably focused while retaining enough surrounding context for question answering.
+### Example evaluation
 
-🔎 Retrieval
+Question: What are the main objectives of Airport Rescue and Fire Fighting?
 
-The system uses:
+Retrieved results (example):
 
-HuggingFace embeddings for semantic representation
-ChromaDB for vector storage
-Similarity search for retrieving relevant chunks
+- Rank 1: chunk_039 | Distance: 0.6927
+- Rank 2: chunk_041 | Distance: 0.7229
+- Rank 3: chunk_040 | Distance: 0.8654
+- Rank 4: chunk_038 | Distance: 0.8841
+- Rank 5: chunk_036 | Distance: 0.9062
 
-For each query, the system retrieves the top relevant chunks and ranks them according to their similarity distance.
 
-Example:
+## 🛠️ Technology Stack
 
-Question:
-What is a Safety Management System in aviation?
+| Technology | Purpose |
+|-----------|---------|
+| Python    | Application development |
+| LangChain | RAG pipeline and document processing |
+| Hugging Face | Text embeddings |
+| ChromaDB  | Vector database |
+| Groq      | Large Language Model |
+| Streamlit | User interface |
+| python-dotenv | Environment variable management |
 
-Rank 1: chunk_033
-Distance: 0.4037
 
-Rank 2: chunk_032
-Distance: 0.5227
+## 📁 Project Structure
 
-Rank 3: chunk_034
-Distance: 0.8323
-
-Lower distance indicates greater similarity in the retrieval results.
-
-📊 Retrieval Evaluation
-
-To assess the performance of the retrieval component, a dedicated evaluation dataset was created in:
-
-src/evaluation/test_questions.json
-
-The evaluation dataset contains aviation questions together with reference answers and relevant chunk IDs.
-
-The evaluation covers different areas of the aviation knowledge base, including:
-
-Airport operations
-Passenger processing
-Air cargo
-Aviation statistics
-ICAO and IATA
-Air Traffic Management
-Safety Management Systems
-Airport security
-ARFF
-Environmental management
-Aviation meteorology
-📈 Evaluation Metrics
-
-The retrieval system was evaluated using the following metrics.
-
-Recall@1
-
-Measures how often the relevant chunk appears as the first retrieved result.
-
-Recall@3
-
-Measures how often the relevant chunk appears within the first three retrieved results.
-
-Recall@5
-
-Measures how often the relevant chunk appears within the first five retrieved results.
-
-Mean Reciprocal Rank (MRR)
-
-Measures how highly the first relevant result is ranked.
-
-Higher values indicate better retrieval performance.
-
-🧪 Evaluation Results
-
-The retrieval evaluation was conducted using 30 test questions.
-
-Metric	Result
-Number of Questions	30
-Recall@1	0.833
-Recall@3	1.000
-Recall@5	1.000
-MRR	0.917
-Interpretation
-
-The system achieved:
-
-83.3% Recall@1, meaning the relevant chunk was the top result for most questions.
-100% Recall@3, meaning the relevant information was retrieved within the first three results for all 30 questions.
-100% Recall@5, meaning the relevant information appeared within the first five results for all questions.
-0.917 MRR, indicating that relevant information was generally ranked near the top of the retrieval results.
-
-These results indicate that the retrieval component provides a strong foundation for the aviation question-answering system.
-
-🧪 Example Evaluation
-
-Example query:
-
-What are the main objectives of Airport Rescue and Fire Fighting?
-
-Retrieved results:
-
-Rank 1: chunk_039 | Distance: 0.6927
-Rank 2: chunk_041 | Distance: 0.7229
-Rank 3: chunk_040 | Distance: 0.8654
-Rank 4: chunk_038 | Distance: 0.8841
-Rank 5: chunk_036 | Distance: 0.9062
-
-The relevant ARFF information was retrieved within the top results, demonstrating the ability of the system to locate appropriate aviation content.
-
-🛠️ Technology Stack
-Technology	Purpose
-Python	Application development
-LangChain	RAG pipeline and document processing
-HuggingFace	Text embeddings
-ChromaDB	Vector database
-Groq	Large Language Model
-Streamlit	User interface
-python-dotenv	Environment variable management
-📁 Project Structure
 Aviation-RAG-assistant/
-│
+
 ├── data/
 │   ├── Part 1.docx
 │   ├── Part 2.docx
@@ -316,240 +196,125 @@ Aviation-RAG-assistant/
 
 The exact file structure may change as the project evolves.
 
-🚀 Installation
-1. Clone the repository
-git clone https://github.com/Lengerpei/Aviation-RAG-assistant.git
-cd Aviation-RAG-assistant
-2. Create a virtual environment
-Windows
-python -m venv .venv
 
-Activate it:
+## Installation & Environment Variables
 
-.venv\Scripts\activate
-macOS/Linux
-python3 -m venv .venv
-source .venv/bin/activate
-3. Install dependencies
+1. Create a virtual environment and activate it (see Quick start above).
+2. Install dependencies:
+
+```bash
 pip install -r requirements.txt
-🔐 Environment Variables
+```
 
-Create a .env file in the project root.
+3. Create a `.env` file in the project root (you can copy `.env.example`). At minimum set:
 
+```
 GROQ_API_KEY=your_api_key_here
+```
 
-Replace the placeholder with your own API key.
+If your setup uses additional services (Hugging Face API, CHROMA settings, or others), add those variables to `.env` and `.env.example`.
 
-Do not commit your .env file to GitHub.
+Do not commit your `.env` file to version control.
 
-The project uses environment variables to avoid exposing API credentials in source code.
 
-🗄️ Build the Vector Database
+## 🗄️ Build the Vector Database
 
-Before running the application, ingest the aviation documents into ChromaDB.
+Before running the application, ingest the aviation documents into ChromaDB:
 
-Run:
-
+```bash
 python -m src.ingest
+```
 
-The ingestion process:
+This loads Word documents from `data/`, processes the content, splits it into chunks, generates embeddings, and stores them in `chromadb/` along with chunk metadata and IDs.
 
-Loads the Word documents.
-Processes the document content.
-Splits the content into chunks.
-Generates embeddings.
-Stores the embeddings in ChromaDB.
-Assigns metadata and chunk IDs.
 
-The vector database is stored in:
-
-chromadb/
-▶️ Run the Application
+## ▶️ Run the Application
 
 Start the Streamlit application:
 
+```bash
 streamlit run src/app.py
+```
 
-The application will open in your browser.
+The UI will open in your browser and users can ask aviation-related questions.
 
-Users can then ask aviation-related questions through the interface.
 
-🔍 Run Retrieval Evaluation
+## 🔍 Run Retrieval Evaluation
 
-The project includes a retrieval evaluation script.
+To evaluate retrieval performance:
 
-Run:
-
+```bash
 python -m src.evaluation.evaluate_retrieval
+```
 
-The script evaluates the predefined questions and reports:
+This prints Recall@1, Recall@3, Recall@5 and MRR for the evaluation dataset.
 
-Recall@1
-Recall@3
-Recall@5
-MRR
-🔎 Inspect Chunk Metadata
 
-The project also includes a utility for checking the metadata stored in ChromaDB.
+## 🔎 Inspect Chunk Metadata
 
-Run:
+Utility to inspect metadata stored in ChromaDB:
 
+```bash
 python -m src.evaluation.check_metadata
+```
 
-This can be used to verify:
+Example output:
 
-Chunk IDs
-Chunk sizes
-Source documents
-
-Example:
-
-{'chunk_size': 770,
- 'chunk_id': 'chunk_001',
- 'source': 'Part 1.docx'}
-🧪 Evaluation Dataset
-
-The evaluation questions are stored in:
-
-src/evaluation/test_questions.json
-
-Each test case contains information such as:
-
+```python
 {
-    "id": "Q001",
-    "question": "What is aviation and why is it important?",
-    "reference_answer": "Aviation involves the operation of aircraft...",
-    "relevant_chunk_ids": [
-        "chunk_001"
-    ]
+ 'chunk_size': 770,
+ 'chunk_id': 'chunk_001',
+ 'source': 'Part 1.docx'
 }
+```
 
-This structure makes the evaluation dataset reproducible and allows the retrieval system to be tested against known relevant chunks.
 
-🛡️ Responsible Use and Limitations
+## 🔮 Future Improvements
 
-The Aviation RAG Assistant is designed as a knowledge and educational support tool.
+Potential future improvements include hybrid keyword+semantic search, query rewriting, reranking, automated answer evaluation, source citations in generated answers, conversation memory, multi-document management, cloud deployment, and monitoring of retrieval performance.
 
-It should not be treated as an operational aviation authority or as a replacement for official aviation regulations, procedures, NOTAMs, safety instructions, or professional judgment.
 
-The system has several limitations:
+## 🛡️ Responsible Use and Limitations
 
-Responses depend on the quality and coverage of the knowledge base.
-The system may not answer questions outside the available documents accurately.
-Retrieval quality depends on the embedding model and chunking strategy.
-Similarity search may occasionally retrieve partially relevant information.
-The language model can still generate incorrect interpretations.
-Aviation information can change over time and should be verified against current official sources where necessary.
+This tool is intended for knowledge and educational support only. It is not an operational aviation authority and should not be used as a substitute for official regulations, NOTAMs, safety instructions, or professional judgment.
 
-Users should verify safety-critical or operational information using appropriate official aviation sources.
+Limitations:
+- Responses depend on the coverage and quality of the knowledge base.
+- The language model can still generate incorrect interpretations.
+- Retrieval quality depends on embedding model and chunking strategy.
 
-🔧 Maintenance and Updating
+Always verify safety-critical or operational information against official sources.
 
-The knowledge base can be updated by adding or replacing documents in the data/ directory.
 
-After updating the documents, rebuild the vector database:
+## 💡 Example Questions
 
-python -m src.ingest
+- What are the main components of Air Traffic Management?
+- What is a Safety Management System in aviation?
+- What are the main objectives of airport security?
+- What are the main types of air cargo?
 
-The retrieval evaluation can then be rerun:
 
-python -m src.evaluation.evaluate_retrieval
-
-This provides a simple way to check whether changes to the knowledge base or retrieval configuration affect system performance.
-
-🔮 Future Improvements
-
-Potential future improvements include:
-
-Hybrid keyword and semantic search
-Query rewriting
-Reranking of retrieved documents
-Improved retrieval evaluation
-Automated answer evaluation
-Source citations in generated answers
-Conversation memory
-Multi-document management
-Better handling of ambiguous questions
-Cloud deployment
-User authentication
-Improved content filtering
-Monitoring and logging of retrieval performance
-💡 Why RAG?
-
-Traditional LLM applications generate responses primarily from information learned during model training.
-
-A RAG system first retrieves relevant information from a specific knowledge base and then provides that information to the language model as context.
-
-This provides several advantages:
-
-Better grounding in the available documents
-Reduced reliance on model memory
-Improved transparency
-Easier knowledge-base updates
-Better control over the information used to answer questions
-
-For an aviation-focused application, this approach is useful because the assistant can be constrained to a defined aviation knowledge base.
-
-📌 Example Questions
-
-Users can ask questions such as:
-
-What are the main components of Air Traffic Management?
-
-What is a Safety Management System in aviation?
-
-What are the main objectives of airport security?
-
-What are the main types of air cargo?
-
-What is the difference between ICAO and IATA?
-
-What are the main stages of a passenger journey?
-
-What are the main objectives of Airport Rescue and Fire Fighting?
-
-What factors can affect aviation operations and safety?
-📂 Repository
+## 📂 Repository
 
 GitHub repository:
 
 https://github.com/Lengerpei/Aviation-RAG-assistant
 
-👨‍💻 Author
+
+## 👨‍💻 Author
 
 Ambrose Lengerpei
 
 Statistician | Data Scientist | AI & Machine Learning Enthusiast
 
-Areas of interest:
+GitHub: https://github.com/Lengerpei
 
-Artificial Intelligence
-Retrieval-Augmented Generation
-Aviation Analytics
-Machine Learning
-Data Science
-Business Intelligence
 
-GitHub:
+## 📄 License
 
-https://github.com/Lengerpei
+This project is licensed under the MIT License. See the LICENSE file for full terms.
 
-📄 License
 
-This project is licensed under the MIT License.
+## 🙏 Acknowledgements
 
-See the LICENSE file for the complete license terms.
-
-🙏 Acknowledgements
-
-This project was developed as part of the Ready Tensor AI Developer Certification Program.
-
-The project demonstrates the practical application of:
-
-Retrieval-Augmented Generation
-Semantic search
-Vector databases
-Embeddings
-Prompt engineering
-Retrieval evaluation
-Aviation-focused knowledge retrieval
+Developed as part of the Ready Tensor AI Developer Certification Program. Demonstrates application of RAG, semantic search, vector databases, embeddings, prompt engineering and retrieval evaluation.
