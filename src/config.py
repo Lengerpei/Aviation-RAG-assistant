@@ -51,8 +51,7 @@ if not GROQ_API_KEY:
 # ============================================================
 
 # Groq model
-MODEL_NAME = "llama-3.3-70b-versatile"
-
+MODEL_NAME = "openai/gpt-oss-120b"
 
 # ============================================================
 # DATA DIRECTORY
