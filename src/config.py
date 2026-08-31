@@ -1,46 +1,23 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from the .env file
+# Load .env when running locally
 load_dotenv()
 
-# ===============================
-# API Keys
-# ===============================
+# Try environment variable first
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+# If not found, try Streamlit secrets
+if not GROQ_API_KEY:
+    try:
+        import streamlit as st
+        GROQ_API_KEY = st.secrets.get("GROQ_API_KEY")
+    except Exception:
+        GROQ_API_KEY = None
+
+# Stop the application if the key is still missing
 if not GROQ_API_KEY:
     raise ValueError(
-        "GROQ_API_KEY not found. Please add it to your .env file."
+        "GROQ_API_KEY is not configured. "
+        "Add it to your .env file locally or Streamlit Secrets when deployed."
     )
-
-# ===============================
-# Model Configuration
-# ===============================
-MODEL_NAME = "llama-3.3-70b-versatile"
-
-# ===============================
-# Embedding Model
-# ===============================
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-
-# ===============================
-# Directories
-# ===============================
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-DATA_DIR = os.path.join(BASE_DIR, "data")
-
-CHROMA_DB_DIR = os.path.join(BASE_DIR, "chromadb")
-
-# ===============================
-# Text Splitting
-# ===============================
-CHUNK_SIZE = 800
-
-CHUNK_OVERLAP = 150
-
-# ===============================
-# Retriever
-# ===============================
-TOP_K = 4
